@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class Deatach_Menus : MonoBehaviour
 {
-    public OVRGrabbable This_Menu;
-    public RectTransform This_Transform;
     public Transform robot;
+
+    private OVRGrabbable grabbable;
+    private RectTransform rectTransform;
+
+    void Start(){
+        grabbable =  transform.GetComponent<OVRGrabbable>();
+        rectTransform = transform.GetComponent<RectTransform>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if(This_Menu.isGrabbed){
-             transform.parent = null;
-             This_Transform.localPosition = This_Menu.grabbedBy.transform.position;
-             This_Transform.localRotation = This_Menu.grabbedBy.transform.rotation;
+        if(grabbable.isGrabbed){
+            transform.parent = null;
+            rectTransform.localPosition = grabbable.grabbedBy.transform.position;
+            rectTransform.localRotation = grabbable.grabbedBy.transform.rotation;
         } else
             transform.parent = robot;
 
