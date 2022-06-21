@@ -17,9 +17,10 @@ namespace RadialMenu.VR {
 	
 		#region Variables
 		
-		[Header("Controller Properties")]
+		/*[Header("Controller Properties")]
 		public SteamVR_TrackedController controller;	// Allow to someone to select the controller which will control the radial menu
-		
+		*/
+		public SimpleCapsuleWithStickMovement StickMovement;
 		[Header("UI Properties")]
 		public List<VR_MenuButton> menuButtons = new List<VR_MenuButton>();	// Contains all the menu buttons
 		public RectTransform m_ArrowContainer;
@@ -31,7 +32,7 @@ namespace RadialMenu.VR {
 		
 		
 		private Vector2 currentAxis;	// The Axis of the main controller, where the display is
-		private SteamVR_Controller.Device controllerDevice;	// Gives us access to the controller itself
+		private GameObject controllerDevice;	// Gives us access to the controller itself
 		
 		private Animator animator;
 		
@@ -60,7 +61,7 @@ namespace RadialMenu.VR {
 			
 				animator = GetComponent<Animator>();	// This guaranties that we have an animator attached, if not it complains
 			
-		        if(controller) {
+		        /*if(controller) {
 					
 					controllerDevice = SteamVR_Controller.Input((int)controller.controllerIndex);
 					
@@ -68,7 +69,7 @@ namespace RadialMenu.VR {
 					controller.PadUntouched += HandlePadUntouched;
 					controller.PadClicked += HandlePadClicked;
 					controller.MenuButtonClicked += HandleMenuActivation;
-				}
+				}*/
 				
 				// Attach each button of the menu to an event
 				if(menuButtons.Count > 0) {
@@ -89,12 +90,12 @@ namespace RadialMenu.VR {
 			
 			void OnDisable() {
 				
-				if(controller) {
+				/*if(controller) {
 					controller.PadTouched -= HandlePadTouched;
 					controller.PadUntouched -= HandlePadUntouched;
 					controller.PadClicked -= HandlePadClicked;
 					controller.MenuButtonClicked -= HandleMenuActivation;
-				}
+				}*/
 				
 				if(OnHover != null)
 					OnHover.RemoveAllListeners();
@@ -105,8 +106,16 @@ namespace RadialMenu.VR {
 		
 		    // Update is called once per frame
 		    void Update() {
+				if(OVRInput.GetDown(OVRInput.Button.Start)){
+					//menuOpen = !menuOpen;
+					HandleMenuActivation();
+				}
+					
+				if(OnClick != null && menuOpen && OVRInput.Get(OVRInput.Button.SecondaryThumbstick))
+					OnClick.Invoke(currentMenuID);
+				
 			
-		    	if(controllerDevice != null)
+		    	if(menuOpen)
 					UpdateMenu();
 			    
 		    }
@@ -116,7 +125,7 @@ namespace RadialMenu.VR {
 		
 		#region Custom Methods
 		
-		void HandlePadTouched(object sender, ClickedEventArgs e) {
+		/*void HandlePadTouched(object sender, ClickedEventArgs e) {
 			
 			isTouching = true;
 			// HandleDebugText("Touched Pad");
@@ -128,33 +137,37 @@ namespace RadialMenu.VR {
 			isTouching = false;
 			// HandleDebugText("Untouched Pad");
 			
-		}
+		}*/
 		
-		void HandlePadClicked(object sender, ClickedEventArgs e) {
+		/*void HandlePadClicked(object sender, ClickedEventArgs e) {
 			
 			// HandleDebugText("Clicked Pad");
 			
 			if(OnClick != null && menuOpen)
 				OnClick.Invoke(currentMenuID);
 			
-		}
+		}*/
 		
-		void HandleMenuActivation(object sender, ClickedEventArgs e) {
+		void HandleMenuActivation(/*object sender, ClickedEventArgs e*/) {
 
 			GameObject SliderJoint = GameObject.Find("SlidersJoints");
 			GameObject GenSpeed = GameObject.Find("GeneralSpeed");
-			if ((SliderJoint != null && this.name == "RadialMenu_right") || (GenSpeed != null && this.name == "RadialMenu_right") || (GameObject.Find("MoveTypeSelector").GetComponent<VR_RadialMenu>().isActive() && this.name == "RadialMenu_right"))
+			if /*(*/(SliderJoint != null && name == "RadialMenu_right")// || (GenSpeed != null && this.name == "RadialMenu_right") || (GameObject.Find("MoveTypeSelector").GetComponent<VR_RadialMenu>().isActive() && this.name == "RadialMenu_right"))
 				return;
 
-			if(this.name == "RadialMenu_right" || this.name == "RadialMenu_left")
-            {
+			/*if(this.name == "RadialMenu_right" || this.name == "RadialMenu_left")
+            {*/
 				menuOpen = !menuOpen;
+				if(menuOpen)
+					StickMovement.enabled = false;
+				else
+					StickMovement.enabled = true;
 
 				//HandleDebugText("Menu is: " + menuOpen);
 				HandleDebugText(menuButtons.ToArray()[0].name);
 
 				HandleAnimator();
-			}			
+			//}			
 			
 		}
 		
@@ -178,10 +191,10 @@ namespace RadialMenu.VR {
 		
 		void UpdateMenu() {
 		
-			if(isTouching && menuOpen){
+			if(/*isTouching && */menuOpen){
 				
 				// Get the current Axis from the Touch Pad and turn it into an Angle
-				currentAxis = controllerDevice.GetAxis();
+				currentAxis = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
 				currentAngle = Vector2.SignedAngle(Vector2.up, currentAxis);
 				
 				// Up	 --> 0
