@@ -9,8 +9,8 @@ public class VRInputModule : BaseInputModule
 
     public Camera m_Camera;
     // Controller
-    public SteamVR_TrackedObject trackedObject;
-    public SteamVR_Controller.Device device;
+   // public SteamVR_TrackedObject trackedObject;
+   // public SteamVR_Controller.Device device;
 
     private GameObject m_CurrentObject = null;
     private PointerEventData m_Data = null;
@@ -21,7 +21,7 @@ public class VRInputModule : BaseInputModule
     protected override void Awake()
     {
         // Selects the right controller
-        device = SteamVR_Controller.Input((int)trackedObject.index);
+        /*device = SteamVR_Controller.Input((int)trackedObject.index);*/
 
         base.Awake();
 
@@ -47,11 +47,11 @@ public class VRInputModule : BaseInputModule
         HandlePointerExitAndEnter(m_Data, m_CurrentObject);
 
         // Press
-        if (device.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
+        if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
             ProcessPress(m_Data);
 
         // Release
-        if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
+        if (!OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
             ProcessRelease(m_Data);
 
         ExecuteEvents.Execute(m_Data.pointerDrag, m_Data, ExecuteEvents.dragHandler);

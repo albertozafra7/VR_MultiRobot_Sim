@@ -65,4 +65,9 @@ public class MoveJoints : MonoBehaviour
 	{
 		UrdfRobot.GetComponent<UrdfRobot>().Values[5] = value * Mathf.Deg2Rad;
 	}
+
+	public void UpdateEE_Frame(){
+		EE_Frame.transform.position = FK_Frame.transform.position;
+		EE_Frame.transform.rotation = FK_Frame.transform.rotation;
+	}
 }
