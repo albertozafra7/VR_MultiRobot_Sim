@@ -42,6 +42,7 @@ namespace RadialMenu.VR {
 		private bool allowNavigation = false;
 		private bool isTouching = false;
 		private float currentAngle;
+		private bool jointMenuOpen = false;
 		
 		
 		// Current and previous position of the arrow

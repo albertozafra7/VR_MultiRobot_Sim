@@ -1,13 +1,16 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Deatach_Menus : MonoBehaviour
 {
     public Transform robot;
+    public Transform left_hand;
 
     private OVRGrabbable grabbable;
     private RectTransform rectTransform;
+
+    private bool was_grabbed = false;
 
     void Start(){
         grabbable =  transform.GetComponent<OVRGrabbable>();
@@ -21,8 +24,11 @@ public class Deatach_Menus : MonoBehaviour
             transform.parent = null;
             rectTransform.localPosition = grabbable.grabbedBy.transform.position;
             rectTransform.localRotation = grabbable.grabbedBy.transform.rotation;
-        } else
+            was_grabbed = true;
+        } else if(was_grabbed)
             transform.parent = robot;
+        else
+            transform.parent = left_hand;
 
 
     }

@@ -21,24 +21,24 @@ public class MoveJoints : MonoBehaviour
 
 	public Slider auxJoint0, auxJoint1, auxJoint2, auxJoint3, auxJoint4, auxJoint5;
 
-
 	void Update()
 	{
-		auxJoint0.value = (UrdfRobot.GetComponent<UrdfRobot>().Values[0]) * Mathf.Rad2Deg;
-		auxJoint1.value = (UrdfRobot.GetComponent<UrdfRobot>().Values[1]) * Mathf.Rad2Deg;
-		auxJoint2.value = (UrdfRobot.GetComponent<UrdfRobot>().Values[2]) * Mathf.Rad2Deg;
-		auxJoint3.value = (UrdfRobot.GetComponent<UrdfRobot>().Values[3]) * Mathf.Rad2Deg;
-		auxJoint4.value = (UrdfRobot.GetComponent<UrdfRobot>().Values[4]) * Mathf.Rad2Deg;
-		auxJoint5.value = (UrdfRobot.GetComponent<UrdfRobot>().Values[5]) * Mathf.Rad2Deg;
-
-		if (GameObject.Find("SlidersJoints") != null && !path.Run)
+		if(EE_Frame.transform.GetComponent<OVRGrabbable>().isGrabbed){
+			auxJoint0.value = (UrdfRobot.GetComponent<UrdfRobot>().Values[0]) * Mathf.Rad2Deg;
+			auxJoint1.value = (UrdfRobot.GetComponent<UrdfRobot>().Values[1]) * Mathf.Rad2Deg;
+			auxJoint2.value = (UrdfRobot.GetComponent<UrdfRobot>().Values[2]) * Mathf.Rad2Deg;
+			auxJoint3.value = (UrdfRobot.GetComponent<UrdfRobot>().Values[3]) * Mathf.Rad2Deg;
+			auxJoint4.value = (UrdfRobot.GetComponent<UrdfRobot>().Values[4]) * Mathf.Rad2Deg;
+			auxJoint5.value = (UrdfRobot.GetComponent<UrdfRobot>().Values[5]) * Mathf.Rad2Deg;
+		}
+		if (GameObject.Find("SlidersJoints") != null && !EE_Frame.transform.GetComponent<OVRGrabbable>().isGrabbed)// && !path.Run)
 			EE_Frame.transform.position = FK_Frame.transform.position;
 
-		if (FK_Frame.transform.position == EE_Frame.transform.position && FK_Frame.transform.rotation == EE_Frame.transform.rotation)
+		/*if (FK_Frame.transform.position == EE_Frame.transform.position && FK_Frame.transform.rotation == EE_Frame.transform.rotation)
 		{
 			URcontroller.GetComponent<URController>().SnapToTarget = false;
 			URcontroller.GetComponent<URController>().RunLinear = true;
-		}
+		}*/
 	}
 
 	public void joint0(float value)
