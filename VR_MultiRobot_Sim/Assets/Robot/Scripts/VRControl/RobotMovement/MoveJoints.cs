@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(URController))]
 
 public class MoveJoints : MonoBehaviour
 {
-	[SerializeField]
-	private UrdfRobot UrdfRobot;
-	//private GameObject UrdfRobot;
-	[SerializeField]
-	private URController URcontroller;
+	public UrdfRobot UrdfRobot;
+
+	public URController URcontroller;
 
 
 	public GameObject FK_Frame;
@@ -67,7 +64,9 @@ public class MoveJoints : MonoBehaviour
 	}
 
 	public void UpdateEE_Frame(){
-		EE_Frame.transform.position = FK_Frame.transform.position;
-		EE_Frame.transform.rotation = FK_Frame.transform.rotation;
+		if (GameObject.Find("SlidersJoints") != null && !EE_Frame.transform.GetComponent<OVRGrabbable>().isGrabbed){
+			EE_Frame.transform.position = FK_Frame.transform.position;
+			EE_Frame.transform.rotation = FK_Frame.transform.rotation;
+		}
 	}
 }
