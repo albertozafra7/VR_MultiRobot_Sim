@@ -153,8 +153,8 @@ namespace RadialMenu.VR {
 
 			GameObject SliderJoint = GameObject.Find("SlidersJoints");
 			GameObject GenSpeed = GameObject.Find("GeneralSpeed");
-			if /*(*/(SliderJoint != null && name == "RadialMenu_right")// || (GenSpeed != null && this.name == "RadialMenu_right") || (GameObject.Find("MoveTypeSelector").GetComponent<VR_RadialMenu>().isActive() && this.name == "RadialMenu_right"))
-				return;
+			//if /*(*/(SliderJoint != null && name == "RadialMenu_right")// || (GenSpeed != null && this.name == "RadialMenu_right") || (GameObject.Find("MoveTypeSelector").GetComponent<VR_RadialMenu>().isActive() && this.name == "RadialMenu_right"))
+			//	return;
 
 			/*if(this.name == "RadialMenu_right" || this.name == "RadialMenu_left")
             {*/

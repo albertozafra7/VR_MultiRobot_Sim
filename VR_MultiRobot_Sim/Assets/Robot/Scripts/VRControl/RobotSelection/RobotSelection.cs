@@ -16,6 +16,15 @@ public class RobotSelection : MonoBehaviour
     public Text RobotName;
     public List<Slider> Sliders;
 
+    // Enum that determine the mode of the program
+    public enum Mode {
+        Selection,
+        Deletion,
+        Move,
+        Creation
+    }
+    private Mode currentMode = Mode.Selection;
+
     // Start is called before the first frame update
 
     // We get the childs which have component URController
@@ -56,6 +65,9 @@ public class RobotSelection : MonoBehaviour
 
     public void UpdateRobotSelected(GameObject RobotChosen){
 
+        if(AvailableRobots.Count == 0)
+            UpdateRobotList();
+
         ManageSelectedIndicator(RobotChosen);
         // Set the global variables
         SelectedRobot = RobotChosen;
@@ -64,8 +76,17 @@ public class RobotSelection : MonoBehaviour
         // In case that we have a joint Menu
         setJointMenu();
 
-        
 
+    }
+
+    public void UpdateRobotSelected(int index){
+        // we ensure that there is at least one robot at the list
+        if(AvailableRobots.Count == 0)
+            UpdateRobotList();
+        
+        if(AvailableRobots.Count != 0 && AvailableRobots.Count > index){
+            UpdateRobotSelected(AvailableRobots[index].gameObject);
+        }
     }
 
     // In case we changed the robot selected we need to update the menu attached to the left hand
@@ -134,5 +155,37 @@ public class RobotSelection : MonoBehaviour
         if(indicator != null)
             indicator.SetActive(true);
     }
+    #endregion
+
+    #region Setters N Getters
+
+    public void setMode(Mode selectedMode){
+        currentMode = selectedMode;
+    }
+
+    public void setMode2Selection(){
+        currentMode = Mode.Selection;
+    }
+
+    public void setMode2Deletion(){
+        currentMode = Mode.Deletion;
+    }
+
+    public void setMode2Creation(){
+        currentMode = Mode.Creation;
+    }
+
+    public void setMode2Move(){
+        currentMode = Mode.Move;
+    }
+
+    public Mode getMode(){
+        return currentMode;
+    }
+
+    public Mode getCurrentMode(){
+        return currentMode;
+    }
+
     #endregion
 }

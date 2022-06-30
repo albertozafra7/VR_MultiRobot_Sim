@@ -7,6 +7,9 @@ TagManager:
   - Slider
   - RobotWrist
   - Robot
+  - Object
+  - Menu
+  - RobotEssential
   layers:
   - Default
   - TransparentFX
