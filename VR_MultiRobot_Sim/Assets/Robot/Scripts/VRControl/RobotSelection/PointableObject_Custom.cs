@@ -31,6 +31,7 @@ public class PointableObject_Custom : MonoBehaviour, IPointerClickHandler, IPoin
 
     //public Component[] meshes;
     private Queue<Color> originalColors = new Queue<Color>();
+    public OVRGrabbable grabbable;
     /*
     private bool SelectionMode = false;
     private bool DeletionMode = false;
@@ -72,7 +73,7 @@ public class PointableObject_Custom : MonoBehaviour, IPointerClickHandler, IPoin
         //Output to console the GameObject's name and the following message
         Debug.Log("Cursor Entering " + name + " GameObject");
 
-        if(GameObject.Find("Pointer") != null){
+        if(GameObject.Find("Pointer") != null && !grabbable.isGrabbed){
             switch(RobotSelectionManager.getCurrentMode()){
                 case RobotSelection.Mode.Selection:
                     if(gameObject.tag == "Robot")

@@ -9,6 +9,8 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 	public bool EnableRotation = true;
 	public bool HMDRotatesPlayer = true;
 	public bool RotationEitherThumbstick = false;
+	public bool SmoothRotation = false;
+	public float RotationSpeed = 4f;
 	public float RotationAngle = 45.0f;
 	public float Speed = 0.0f;
 	public OVRCameraRig CameraRig;
@@ -38,6 +40,11 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
         if (HMDRotatesPlayer) RotatePlayerToHMD();
 		if (EnableLinearMovement) StickMovement();
 		if (EnableRotation) SnapTurn();
+	}
+
+	void Update(){
+		if(SmoothRotation)
+			SnapTurn();
 	}
 
     void RotatePlayerToHMD()
@@ -71,27 +78,31 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 
 	void SnapTurn()
 	{
-		if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickLeft) ||
-			(RotationEitherThumbstick && OVRInput.Get(OVRInput.Button.PrimaryThumbstickLeft)))
-		{
-			if (ReadyToSnapTurn)
+		if(SmoothRotation){
+			transform.RotateAround(CameraRig.centerEyeAnchor.position, Vector3.up, RotationSpeed*0.2f*OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick)[0]);
+		} else {
+			if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickLeft) ||
+				(RotationEitherThumbstick && OVRInput.Get(OVRInput.Button.PrimaryThumbstickLeft)))
 			{
-				ReadyToSnapTurn = false;
-				transform.RotateAround(CameraRig.centerEyeAnchor.position, Vector3.up, -RotationAngle);
+				if (ReadyToSnapTurn)
+				{
+					ReadyToSnapTurn = false;
+					transform.RotateAround(CameraRig.centerEyeAnchor.position, Vector3.up, -RotationAngle);
+				}
 			}
-		}
-		else if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickRight) ||
-			(RotationEitherThumbstick && OVRInput.Get(OVRInput.Button.PrimaryThumbstickRight)))
-		{
-			if (ReadyToSnapTurn)
+			else if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickRight) ||
+				(RotationEitherThumbstick && OVRInput.Get(OVRInput.Button.PrimaryThumbstickRight)))
 			{
-				ReadyToSnapTurn = false;
-				transform.RotateAround(CameraRig.centerEyeAnchor.position, Vector3.up, RotationAngle);
+				if (ReadyToSnapTurn)
+				{
+					ReadyToSnapTurn = false;
+					transform.RotateAround(CameraRig.centerEyeAnchor.position, Vector3.up, RotationAngle);
+				}
 			}
-		}
-		else
-		{
-			ReadyToSnapTurn = true;
+			else
+			{
+				ReadyToSnapTurn = true;
+			}
 		}
 	}
 }

@@ -112,8 +112,12 @@ namespace RadialMenu.VR {
 					HandleMenuActivation();
 				}
 					
-				if(OnClick != null && menuOpen && OVRInput.Get(OVRInput.Button.SecondaryThumbstick))
+				if(OnClick != null && menuOpen && (OVRInput.Get(OVRInput.Button.SecondaryThumbstick) || OVRInput.Get(OVRInput.RawButton.RIndexTrigger) || OVRInput.GetDown(OVRInput.RawButton.X))){
 					OnClick.Invoke(currentMenuID);
+					StickMovement.EnableRotation = true;
+					StickMovement.HMDRotatesPlayer = true;
+					StickMovement.SmoothRotation = true;
+				}
 				
 			
 		    	if(menuOpen)
@@ -159,10 +163,15 @@ namespace RadialMenu.VR {
 			/*if(this.name == "RadialMenu_right" || this.name == "RadialMenu_left")
             {*/
 				menuOpen = !menuOpen;
-				if(menuOpen)
-					StickMovement.enabled = false;
-				else
-					StickMovement.enabled = true;
+				if(menuOpen){
+					StickMovement.EnableRotation = false;
+					StickMovement.HMDRotatesPlayer = false;
+					StickMovement.SmoothRotation = false;
+				}else{
+					StickMovement.EnableRotation = true;
+					StickMovement.HMDRotatesPlayer = true;
+					StickMovement.SmoothRotation = true;
+				}
 
 				//HandleDebugText("Menu is: " + menuOpen);
 				HandleDebugText(menuButtons.ToArray()[0].name);
