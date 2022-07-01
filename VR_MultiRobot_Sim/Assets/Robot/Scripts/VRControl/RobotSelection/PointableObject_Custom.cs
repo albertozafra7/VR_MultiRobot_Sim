@@ -175,7 +175,7 @@ public class PointableObject_Custom : MonoBehaviour, IPointerClickHandler, IPoin
         if(GameObject.ReferenceEquals(RobotSelectionManager.SelectedRobot, gameObject)){
             if(RobotSelectionManager.AvailableRobots.Count > 1){
                 for(int i = 0; i < RobotSelectionManager.AvailableRobots.Count; i++){
-                    if(!GameObject.ReferenceEquals(RobotSelectionManager.AvailableRobots[i], gameObject)){
+                    if(!GameObject.ReferenceEquals(RobotSelectionManager.AvailableRobots[i].gameObject, gameObject)){
                         RobotSelectionManager.UpdateRobotSelected(i);
                         break;
                     }
@@ -185,6 +185,8 @@ public class PointableObject_Custom : MonoBehaviour, IPointerClickHandler, IPoin
             }
         }
 
+        transform.parent.parent = null;
+        RobotSelectionManager.UpdateRobotList();
         // We delete the robot
         Destroy(transform.parent.gameObject);
 
@@ -194,7 +196,7 @@ public class PointableObject_Custom : MonoBehaviour, IPointerClickHandler, IPoin
         Destroy(gameObject);
     }
 
-  /*  void OnDestroy() {
+    /*void OnDestroy() {
         if(gameObject.tag == "Robot")
             RobotSelectionManager.UpdateRobotList();
     }*/

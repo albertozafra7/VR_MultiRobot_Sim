@@ -53,13 +53,15 @@ public class RobotSelection : MonoBehaviour
     #region Custom Methods
     public void UpdateRobotList()
     {
+        Debug.LogError(transform.childCount);
         if (AvailableRobots.Count != transform.childCount)
         {
-            AvailableRobots = new List<URController>(transform.childCount);
+            AvailableRobots.Clear();
+            Debug.LogError(AvailableRobots.Count);
         }
         for (int i = 0; i < transform.childCount; i++)
         {
-           AvailableRobots[i] = transform.GetChild(i).GetComponentInChildren(typeof(URController)) as URController;
+           AvailableRobots.Add(transform.GetChild(i).GetComponentInChildren(typeof(URController)) as URController);
 
         }
     }
