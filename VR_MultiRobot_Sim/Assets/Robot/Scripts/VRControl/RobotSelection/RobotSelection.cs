@@ -53,16 +53,20 @@ public class RobotSelection : MonoBehaviour
     #region Custom Methods
     public void UpdateRobotList()
     {
-        Debug.LogError(transform.childCount);
+        //Debug.LogError(transform.childCount);
         if (AvailableRobots.Count != transform.childCount)
         {
             AvailableRobots.Clear();
-            Debug.LogError(AvailableRobots.Count);
+            //Debug.LogError(AvailableRobots.Count);
         }
         for (int i = 0; i < transform.childCount; i++)
         {
            AvailableRobots.Add(transform.GetChild(i).GetComponentInChildren(typeof(URController)) as URController);
 
+        }
+        if(AvailableRobots.Count == 1){
+            SelectedRobot = AvailableRobots[0].gameObject;
+            SelectedRobot_Controller = AvailableRobots[0];
         }
     }
 
@@ -88,7 +92,8 @@ public class RobotSelection : MonoBehaviour
             UpdateRobotList();
         
         if(AvailableRobots.Count != 0 && AvailableRobots.Count > index){
-            UpdateRobotSelected(AvailableRobots[index].gameObject);
+            if(AvailableRobots[index].gameObject != null)
+                UpdateRobotSelected(AvailableRobots[index].gameObject);
         }
     }
 

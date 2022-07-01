@@ -177,7 +177,8 @@ public class ObjectCreationManager : MonoBehaviour
     public void ManageActivity(){
         if(cloning){
             StopCloning();
-            RobotManager.setMode2None();
+            if(RobotManager.getCurrentMode() == RobotSelection.Mode.Creation)
+                RobotManager.setMode2None();
         }
     }
 

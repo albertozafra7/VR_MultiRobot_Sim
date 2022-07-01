@@ -114,7 +114,7 @@ namespace RadialMenu.VR {
 					
 				if(OnClick != null && menuOpen && (OVRInput.Get(OVRInput.Button.SecondaryThumbstick) || OVRInput.Get(OVRInput.RawButton.RIndexTrigger) || OVRInput.GetDown(OVRInput.RawButton.X))){
 					OnClick.Invoke(currentMenuID);
-					Debug.LogError(currentMenuID);
+					//Debug.LogError(currentMenuID);
 					if(currentMenuID != 5){
 						StickMovement.EnableRotation = true;
 						StickMovement.HMDRotatesPlayer = true;

@@ -20,20 +20,9 @@ public class DeletionManager : MonoBehaviour
     public void DeleteAllRobots(){
         DeletionArray = GameObject.FindGameObjectsWithTag("RobotEssential");
         foreach (GameObject DeletionObject in DeletionArray){
-            if(GameObject.ReferenceEquals(RobotSelectionManager.SelectedRobot, DeletionObject)){
-                if(RobotSelectionManager.AvailableRobots.Count > 1){
-                    for(int i = 0; i < RobotSelectionManager.AvailableRobots.Count; i++){
-                        if(!GameObject.ReferenceEquals(RobotSelectionManager.AvailableRobots[i], DeletionObject)){
-                            RobotSelectionManager.UpdateRobotSelected(i);
-                            break;
-                        }
-
-                    }
-            
-                }
-            }
+            DeletionObject.transform.parent = null;
             // We delete the robot
-            Destroy(DeletionObject.transform.parent.gameObject);
+            Destroy(DeletionObject);
         }
 
 
