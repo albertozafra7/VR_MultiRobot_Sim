@@ -175,11 +175,12 @@ public class PointableObject_Custom : MonoBehaviour, IPointerClickHandler, IPoin
         if(GameObject.ReferenceEquals(RobotSelectionManager.SelectedRobot, gameObject)){
             if(RobotSelectionManager.AvailableRobots.Count > 1){
                 for(int i = 0; i < RobotSelectionManager.AvailableRobots.Count; i++){
-                    if(!GameObject.ReferenceEquals(RobotSelectionManager.AvailableRobots[i].gameObject, gameObject)){
-                        RobotSelectionManager.UpdateRobotSelected(i);
-                        break;
+                    if(RobotSelectionManager.AvailableRobots[i].gameObject != null){
+                        if(!GameObject.ReferenceEquals(RobotSelectionManager.AvailableRobots[i].gameObject, gameObject)){
+                            RobotSelectionManager.UpdateRobotSelected(i);
+                            break;
+                        }
                     }
-
                 }
         
             }
