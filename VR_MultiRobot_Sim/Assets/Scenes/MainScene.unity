@@ -2245,7 +2245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9c0a452fb163d469bbbf6d89f8ac69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newparent: {fileID: 815890433}
+  newparent: {fileID: 348867792}
   left_hand: {fileID: 4926590348036439696}
 --- !u!114 &139967414
 MonoBehaviour:
@@ -4607,6 +4607,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &348867791
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 348867792}
+  m_Layer: 0
+  m_Name: DesatachedMenus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &348867792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348867791}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.052667145, y: 0.07957773, z: 0.08082563}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &350313955
 GameObject:
   m_ObjectHideFlags: 0
@@ -5409,7 +5439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9c0a452fb163d469bbbf6d89f8ac69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newparent: {fileID: 815890433}
+  newparent: {fileID: 348867792}
   left_hand: {fileID: 4926590348036439696}
 --- !u!114 &370180869
 MonoBehaviour:
@@ -22464,7 +22494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9c0a452fb163d469bbbf6d89f8ac69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newparent: {fileID: 815890433}
+  newparent: {fileID: 348867792}
   left_hand: {fileID: 4926590348036439696}
 --- !u!114 &1409120886
 MonoBehaviour:
@@ -33360,7 +33390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9c0a452fb163d469bbbf6d89f8ac69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newparent: {fileID: 815890433}
+  newparent: {fileID: 348867792}
   left_hand: {fileID: 4926590348036439696}
 --- !u!114 &2052952155
 MonoBehaviour:

@@ -99,6 +99,7 @@ public class ObjectCreationManager : MonoBehaviour
             duplicate.tag = "RobotEssential";
             FindRobotChild(duplicate).tag = "Robot";
             Destroy(duplicate.GetComponent<BoxCollider>());
+            RobotManager.UpdateRobotList();
         } else if(ObjectToPlace.tag == "ObjectMenu"){
             duplicate.tag = "Object";
         }
