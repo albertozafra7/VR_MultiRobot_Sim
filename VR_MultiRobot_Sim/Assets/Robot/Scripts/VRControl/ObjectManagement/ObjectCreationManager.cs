@@ -58,7 +58,7 @@ public class ObjectCreationManager : MonoBehaviour
                 pointableObject.RestoreColor();
                 //pointableObject.ApplyColorMask(pointableObject.HoverColor_Creation);
 
-                if(OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger) >= 0.8f)
+                if(OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger) >= 0.9f)
                     PlaceObjectCopy(ObjectSelected);
 
             } else {
