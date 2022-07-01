@@ -17,7 +17,7 @@ public class GoHome_Custom : MonoBehaviour
             Robot.Values[i] = 0;
         
         EE_Frame = Robot.transform.parent.Find("EE_Frame").gameObject.transform;
-        FK_Frame = Robot.transform.parent.Find("FK_Frame").gameObject.transform;
+        FK_Frame = Robot.transform.parent.Find("FK Frame").gameObject.transform;
 
         EE_Frame.position = FK_Frame.position;
         EE_Frame.rotation = FK_Frame.rotation;
