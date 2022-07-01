@@ -42,14 +42,11 @@ public class PositionVerifier : MonoBehaviour
     }
 
     void OnCollisionStay(Collision col){
-        if(collidedObjects.Count > 0){
-            foreach(Collider ObjectCollider in collidedObjects){
-                if(ObjectCollider.gameObject.tag == "Robot" || ObjectCollider.gameObject.tag == "Object" || ObjectCollider.gameObject.tag == "ObjectMenu" || ObjectCollider.gameObject.tag == "RobotMenu" || ObjectCollider.gameObject.tag == "RobotEssential")
-                    return;
-            }
-            is_feasible_pos = true;
-        } else 
-            is_feasible_pos = true;
+        is_feasible_pos = true;
+        collidedObjects.Clear();
+        OnCollisionEnter(col);
+
+  
     }
 
 }

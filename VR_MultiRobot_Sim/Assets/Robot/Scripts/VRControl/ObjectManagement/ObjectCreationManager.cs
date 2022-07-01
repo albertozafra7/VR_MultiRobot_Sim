@@ -54,8 +54,9 @@ public class ObjectCreationManager : MonoBehaviour
                 else if (ObjectSelected.tag == "ObjectMenu")
                     pointableObject = ObjectSelected.GetComponent<PointableObject_Custom>();
 
+                
                 pointableObject.RestoreColor();
-                pointableObject.ApplyColorMask(pointableObject.HoverColor_Creation);
+                //pointableObject.ApplyColorMask(pointableObject.HoverColor_Creation);
 
                 if(OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger) >= 0.8f)
                     PlaceObjectCopy(ObjectSelected);
@@ -98,7 +99,7 @@ public class ObjectCreationManager : MonoBehaviour
         if(ObjectToPlace.tag == "RobotMenu"){
             duplicate.tag = "RobotEssential";
             FindRobotChild(duplicate).tag = "Robot";
-            Destroy(duplicate.GetComponent<BoxCollider>());
+            //Destroy(duplicate.GetComponent<BoxCollider>());
             RobotManager.UpdateRobotList();
         } else if(ObjectToPlace.tag == "ObjectMenu"){
             duplicate.tag = "Object";
@@ -162,12 +163,22 @@ public class ObjectCreationManager : MonoBehaviour
 
         ObjectSelected = DesiredObject;
         cloning = true;
+
+        if(ObjectSelected.tag == "RobotMenu"){
+            pointableObject = FindRobotChild(ObjectSelected).GetComponent<PointableObject_Custom>();
+        }
+        else if (ObjectSelected.tag == "ObjectMenu")
+            pointableObject = ObjectSelected.GetComponent<PointableObject_Custom>();
+
+        pointableObject.RestoreColor();
+        SetAllBoxCollider(true);
         //SetAllObjectsRigidBody(true);
         //Debug.LogError("Setup Mode Invoked");
 
     }
 
     public void StopCloning(){
+        SetAllBoxCollider(false);
         //SetAllObjectsRigidBody(false);
         if(ObjectSelected.activeSelf)
             ObjectSelected.SetActive(false);
@@ -193,5 +204,30 @@ public class ObjectCreationManager : MonoBehaviour
 
     public void setCloning(bool value){
         cloning = value;
+    }
+
+    public void SetAllBoxCollider(bool on_off){
+         GameObject[] EssentialRobots = GameObject.FindGameObjectsWithTag("RobotEssential"); 
+
+         for(int i = 0; i < EssentialRobots.Length; i++){
+                EssentialRobots[i].GetComponent<BoxCollider>().enabled = on_off;
+         }
+         GameObject[] Robots = GameObject.FindGameObjectsWithTag("Robot");
+         if(Robots.Length != 0){
+            foreach(GameObject robot in Robots)
+                ChangeMeshColliderRecursive(robot.transform, !on_off);
+         }
+            
+    }
+
+    public void ChangeMeshColliderRecursive(Transform trans, bool on_off)
+    {
+        foreach (Transform child  in trans)
+        {
+            MeshCollider[] colliders_mesh = child.gameObject.GetComponentsInChildren<MeshCollider>();
+            for(int i = 0; i < colliders_mesh.Length; i++)
+                colliders_mesh[i].enabled = on_off;
+            ChangeMeshColliderRecursive(child, on_off);
+        }
     }
 }

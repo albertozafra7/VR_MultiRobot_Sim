@@ -166,6 +166,8 @@ public class PointableObject_Custom : MonoBehaviour, IPointerClickHandler, IPoin
         for(int i = 0; i < desiredColors.Count; i++)
             originalColors.Enqueue(desiredColors.Dequeue());
     }
+
+
     #endregion
 
     #region Constructors and Destructors
