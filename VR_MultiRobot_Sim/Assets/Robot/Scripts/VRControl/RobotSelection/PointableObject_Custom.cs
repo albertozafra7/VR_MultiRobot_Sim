@@ -38,6 +38,14 @@ public class PointableObject_Custom : MonoBehaviour, IPointerClickHandler, IPoin
     private bool MoveMode = false;
     private bool CreationMode = false;*/
 
+    /*public void Awake(){
+        foreach (Renderer mesh_Renderer in meshes){
+            for(int i = 0; i < mesh_Renderer.materials.Length; i++){
+                originalColors.Enqueue(mesh_Renderer.materials[i].color);
+            }
+        }
+    }*/
+
     #region callbacks
 
     //Detect if a click occurs
@@ -145,6 +153,18 @@ public class PointableObject_Custom : MonoBehaviour, IPointerClickHandler, IPoin
                     mesh_Renderer.materials[i].color = originalColors.Dequeue();
             }      
         }
+    }
+
+    public Queue<Color> getOriginalColors(){
+        return originalColors;
+    }
+
+    public void setOriginalColors(Queue<Color> desiredColors){
+        for(int i = 0; i < originalColors.Count; i++)
+            originalColors.Dequeue();
+        
+        for(int i = 0; i < desiredColors.Count; i++)
+            originalColors.Enqueue(desiredColors.Dequeue());
     }
     #endregion
 

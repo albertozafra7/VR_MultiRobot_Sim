@@ -10,6 +10,8 @@ TagManager:
   - Object
   - Menu
   - RobotEssential
+  - RobotMenu
+  - ObjectMenu
   layers:
   - Default
   - TransparentFX

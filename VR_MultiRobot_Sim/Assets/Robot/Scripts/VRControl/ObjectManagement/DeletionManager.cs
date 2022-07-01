@@ -18,7 +18,7 @@ public class DeletionManager : MonoBehaviour
     }
 
     public void DeleteAllRobots(){
-        DeletionArray = GameObject.FindGameObjectsWithTag("Robot");
+        DeletionArray = GameObject.FindGameObjectsWithTag("RobotEssential");
         foreach (GameObject DeletionObject in DeletionArray){
             if(GameObject.ReferenceEquals(RobotSelectionManager.SelectedRobot, DeletionObject)){
                 if(RobotSelectionManager.AvailableRobots.Count > 1){

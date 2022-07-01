@@ -21,7 +21,8 @@ public class RobotSelection : MonoBehaviour
         Selection,
         Deletion,
         Move,
-        Creation
+        Creation,
+        None
     }
     private Mode currentMode = Mode.Selection;
 
@@ -177,6 +178,10 @@ public class RobotSelection : MonoBehaviour
 
     public void setMode2Move(){
         currentMode = Mode.Move;
+    }
+
+    public void setMode2None(){
+        currentMode = Mode.None;
     }
 
     public Mode getMode(){
