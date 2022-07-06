@@ -1,0 +1,20 @@
+<launch>
+    <arg name="model" default="$(find ros_learning)/urdf/scara.urdf"/>
+    <arg name="gui" default="true" />
+    <param name="robot_description" textfile="$(find ros_learning)/urdf/scara.urdf" />
+    <param name="use_gui" value="$(arg gui)"/>
+    <node pkg="ros_learning" name="ik" type="inverse_kinematics.py" output="screen"/>
+    <node pkg="ros_learning" name="moving_frame" type="moving_frame.py" output="screen">
+
+        <param name="omega" type="double" value="1" />
+        <param name="radius" type="double" value="0" />
+        <param name="rate" type="int" value="10" />
+    </node>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node pkg="rviz" name="rviz" type="rviz"/>
+
+
+
+    
+</launch>

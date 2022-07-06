@@ -69,4 +69,18 @@ public class MoveJoints : MonoBehaviour
 			EE_Frame.transform.rotation = FK_Frame.transform.rotation;
 		}
 	}
+
+	public void UpdateJoints(){
+		auxJoint0.value = (UrdfRobot.GetComponent<UrdfRobot>().Values[0]) * Mathf.Rad2Deg;
+		auxJoint1.value = (UrdfRobot.GetComponent<UrdfRobot>().Values[1]) * Mathf.Rad2Deg;
+		auxJoint2.value = (UrdfRobot.GetComponent<UrdfRobot>().Values[2]) * Mathf.Rad2Deg;
+		auxJoint3.value = (UrdfRobot.GetComponent<UrdfRobot>().Values[3]) * Mathf.Rad2Deg;
+		if(UrdfRobot.GetComponent<UrdfRobot>().Values.Count > 4){
+			auxJoint4.value = (UrdfRobot.GetComponent<UrdfRobot>().Values[4]) * Mathf.Rad2Deg;
+			auxJoint5.value = (UrdfRobot.GetComponent<UrdfRobot>().Values[5]) * Mathf.Rad2Deg;
+		}
+		UpdateEE_Frame();
+	}
+
+	
 }

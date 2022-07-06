@@ -22,6 +22,8 @@ public class GoHome_Custom : MonoBehaviour
         EE_Frame.position = FK_Frame.position;
         EE_Frame.rotation = FK_Frame.rotation;
 
+        //Robot.gameObject.GetComponent<MoveJoints>().UpdateJoints();
+
 
         /*Robot.Values[0] = 0;
         Robot.Values[1] = 0;

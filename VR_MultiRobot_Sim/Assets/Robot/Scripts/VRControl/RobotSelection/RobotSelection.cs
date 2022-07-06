@@ -145,11 +145,12 @@ public class RobotSelection : MonoBehaviour
                         break;
                 }
                 Sliders[i].onValueChanged.AddListener(delegate {SelectedRobot.GetComponent<MoveJoints>().UpdateEE_Frame();});
-
             } else
                 Sliders[i].enabled = false;
 
         }
+
+        SelectedRobot.GetComponent<MoveJoints>().UpdateJoints();
 
 
     }

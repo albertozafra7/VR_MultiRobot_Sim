@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<robot name="basics">
+  <link name="base_link">
+    <visual>
+      <geometry>
+      	<mesh filename="package://ros_learning/meshes/Body.dae"/>
+      </geometry>
+      
+    </visual>
+  </link>
+
+  <link name="hat">
+    <visual>
+      <geometry>
+      	<mesh filename="package://ros_learning/meshes/Hat.dae"/>
+      </geometry>
+      
+    </visual>
+  </link>
+
+  <link name="eyes">
+    <visual>
+      <geometry>
+      	<mesh filename="package://ros_learning/meshes/Eyes.dae"/>
+      </geometry>
+      
+    </visual>
+  </link>
+
+  <link name="nose">
+    <visual>
+      <geometry>
+      	<mesh filename="package://ros_learning/meshes/Nose.dae"/>
+      </geometry>
+      
+    </visual>
+  </link>
+
+  <joint name="body_and_hat" type="fixed">
+    <parent link="base_link"/>
+    <child link="hat"/>
+    
+  
+  </joint>
+
+  <joint name="body_and_eye" type="fixed">
+    <parent link="base_link"/>
+    <child link="eyes"/>
+    <origin xyz="0 0 0.035"/>
+    
+  </joint>
+
+  <joint name="body_and_nose" type="fixed">
+    <parent link="base_link"/>
+    <child link="nose"/>
+    <origin xyz="0 0 0.02"/>
+  </joint>
+  
+</robot>
